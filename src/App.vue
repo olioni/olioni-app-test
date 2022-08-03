@@ -1,26 +1,54 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app-dashboard">
+    <mainDashboard :item="item" @show-project-dash="showProjectDashboard" v-if="showMain"/>
+    <projectDashboard :personObj="item" v-if="showProject"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import mainDashboard from './components/mainDashboard.vue'
+import projectDashboard from './components/projectDashboard.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    mainDashboard,
+    projectDashboard
+  },
+  data() {
+    return {
+      showMain: true,
+      showProject: false,
+
+      personObj: null,
+    }
+  },
+  methods: {
+    showProjectDashboard() {
+      // console.log(item)
+      console.log("showing project dashboard")
+      this.showMain = false
+      this.showProject = true
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+  * {
+    margin: 0;
+  }
+
+  #app-dashboard {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-direction: column;
+  }
+
 </style>
